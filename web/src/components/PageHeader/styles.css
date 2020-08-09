@@ -1,0 +1,112 @@
+#page-teacher-list {
+  width: 100vw;
+  height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary);
+}
+
+.page-header .top-bar-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-in-primary);
+  background: var(--color-primary-dark);
+  padding: 1.6rem 4rem;
+  border-bottom: 1px solid var(--color-primary-darker);
+}
+
+.page-header .top-bar-container a {
+  height: 3.2rem;
+  transition: opacity 0.2s;
+}
+
+.page-header .top-bar-container span {
+  font: 500 1.6rem Archivo;
+  font-style: normal;
+  line-height: 17px;
+  color: var(--color-text-in-primary);
+}
+
+.page-header .top-bar-container a:hover {
+  opacity: 0.6;
+}
+
+.page-header .top-bar-container > img {
+  height: 1.6rem;
+}
+
+.page-header .header-content {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  margin: 3.2rem auto;
+}
+.page-header .header-content .header-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page-header .header-content .header-info .message {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.page-header .header-content .header-info .message img {
+  padding-right: 1.4rem;
+  justify-content: center;
+}
+.page-header .header-content .header-info .message p {
+  font-size: 1.2rem;
+  width: 15rem;
+  margin: 0;
+}
+
+.page-header .header-content .header-info strong {
+  font: 700 3.6rem Archivo;
+  line-height: 4.2rem;
+  color: var(--color-title-in-primary);
+}
+
+.page-header .header-content p {
+  max-width: 30rem;
+  font: 400 1.6rem Poppins;
+  line-height: 2.6rem;
+  color: var(--color-text-in-primary);
+  margin-top: 2.4rem;
+}
+
+@media (min-width: 700px) {
+  .page-header {
+    height: 340px;
+  }
+  .page-header .top-bar-container {
+    padding: 1.6rem 13rem;
+  }
+  .page-header .header-content .header-info {
+    flex-direction: row;
+  }
+.page-header .header-content .header-info .message {
+  justify-content: center;
+}
+  .page-header .header-content {
+    flex: 1;
+    max-width: 740px;
+    margin: 0 auto;
+    padding-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .page-header .header-content .header-info strong {
+    width: 350px;
+  }
+}
