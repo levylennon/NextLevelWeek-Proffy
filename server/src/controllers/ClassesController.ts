@@ -61,9 +61,6 @@ export default class ClassesController {
 
   async create(Request: Request, Response: Response) {
     const {
-      name,
-      avatar,
-      whatsapp,
       bio,
       subject,
       cost,
@@ -71,32 +68,32 @@ export default class ClassesController {
     } = Request.body;
 
     try {
-      const User = await UserModel.create({
-        name,
-        avatar,
-        whatsapp,
-        bio,
-      });
+      // const User = await UserModel.create({
+      //   name,
+      //   avatar,
+      //   whatsapp,
+      //   bio,
+      // });
 
-      const user = User._id;
+      // const user = User._id;
 
-      // convert the value of 'FROM' and 'TO' to number
-      const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
-        return {
-          week_day: scheduleItem.week_day,
-          from: convertHourToMinutes(scheduleItem.from),
-          to: convertHourToMinutes(scheduleItem.to),
-        };
-      });
+      // // convert the value of 'FROM' and 'TO' to number
+      // const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
+      //   return {
+      //     week_day: scheduleItem.week_day,
+      //     from: convertHourToMinutes(scheduleItem.from),
+      //     to: convertHourToMinutes(scheduleItem.to),
+      //   };
+      // });
 
-      await ClassesModel.create({
-        user,
-        subject,
-        cost,
-        schedule: classSchedule,
-      });
+      // await ClassesModel.create({
+      //   user,
+      //   subject,
+      //   cost,
+      //   schedule: classSchedule,
+      // });
 
-      return Response.status(201).send();
+      // return Response.status(201).send();
     } catch (error) {
       return Response.status(400).json({
         error: "Unexpected error while creating new class",

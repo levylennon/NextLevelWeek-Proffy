@@ -1,12 +1,27 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { InputLabel } from "../../components/Input";
 import logo from "../../assets/images/logo.svg";
 import purpleHeartIcon from "../../assets/images/icons/purple-heart.svg";
 
-import './styles.css'
+import "./styles.css";
+import api from "../../services/api";
 
 export default function Home() {
+  const [email, SetEmail] = useState("");
+  const [password, SetPassword] = useState("");
+  const [remember, SetRemember] = useState(false);
+
+  function handleLogin(event: FormEvent) {
+    event.preventDefault();
+    api.post("/login",{
+      email,
+      password
+    }).then((Response) => {
+      const { total } = Response.data;
+    });
+  }
+
   return (
     <div id="page-home">
       <div id="page-home-content">
@@ -18,9 +33,24 @@ export default function Home() {
         </div>
         <div className="right-side">
           <span>Fazer login</span>
-          <form>
-            <InputLabel label="Usuário" name="user" />
-            <InputLabel label="Senha" name="password" type="password" />
+          <form onSubmit={handleLogin}>
+            <InputLabel
+              label="E-mail"
+              name="email"
+              value={email}
+              onChange={(event) => {
+                SetEmail(event.target.value);
+              }}
+            />
+            <InputLabel
+              label="Senha"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(event) => {
+                SetPassword(event.target.value);
+              }}
+            />
             <div className="options-form">
               <div className="remember">
                 <input type="radio" name="" id="remember" />
