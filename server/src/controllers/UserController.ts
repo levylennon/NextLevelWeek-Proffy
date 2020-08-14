@@ -12,13 +12,13 @@ export default class ClassesController {
       bcrypt.hash(password, salt, async function (err, hash) {
         if (err) console.log(err);
 
-        const password = await hash;
+        const HashPassword = await hash;
         try {
           UserModel.create({
             name,
             lastname,
             email,
-            password,
+            password: HashPassword,
           });
 
           Response.status(200).send();
@@ -31,19 +31,25 @@ export default class ClassesController {
     });
   }
   async login(Request: Request, Response: Response) {
-    const { email, password } = Request.body;
-    
-    async function checkUser(email, password) {
-      //... fetch user from a db etc.
-   
-      const match = await bcrypt.compare(password, email.passwordHash);
-   
-      if(match) {
-          //login
-      }
-   
-      //...
-  }
+    try {
+      const { email, password } = Request.body;
 
+      const user = await UserModel.findOne({ email });
+
+      if (!user) {
+        return Response.status(400).json({ error: "User not found" });
+      }
+
+      if (!(await user.compareHash(password))) {
+        return Response.status(400).json({ error: "Invalid password" });
+      }
+
+      return Response.json({
+        user: { name: user.name, lastname: user.lastname },
+        token: user.generateToken(),
+      });
+    } catch (err) {
+      return Response.status(400).json({ error: "User authentication failed" });
+    }
   }
 }

@@ -13,12 +13,20 @@ const subjectControllers = new SubjectController();
 const connectionControllers = new ConnectionController();
 const RegisterControllers = new RegisterController();
 
-// router classes
-routes.get("/user", classControllers.index);
+// middleware
+import authenticator from './helpers/auth'
+
+
+// router Register 
+routes.post("/register", RegisterControllers.create);
+
 routes.post("/user", userControllers.create);
 routes.post("/login", userControllers.login);
 
+routes.use(authenticator)
 
+// router classes
+routes.get("/user", classControllers.index);
 // router classes
 routes.get("/classes", classControllers.index);
 routes.post("/classes", classControllers.create);
@@ -31,11 +39,5 @@ routes.post("/subject", subjectControllers.create);
 // router connection 
 routes.get("/connections", connectionControllers.index);
 routes.post("/connections", connectionControllers.create);
-
-
-// router Register 
-routes.post("/register", RegisterControllers.create);
-
-
 
 export default routes;
